@@ -23,9 +23,9 @@
             <div class="col-md-8">
                 <a href="#" class="list-group-item list-group-item-action active py-3 lh-tight" aria-current="true">
                     <div class="d-flex w-100 align-items-center justify-content-between">
-                        <small>Wed</small>
+                        <small>Дата создания</small>
                         <strong class="mb-2">List group item heading</strong>
-                        <small>Wed</small>
+                        <small>Дата исполнения</small>
                     </div>
                 </a>
             </div>
@@ -56,8 +56,39 @@
             </div>
         </div>
 
-        <div class="btn-group " role="group" >            
-            <button type="button" class="btn btn-success">Добавить</button>
+        <div class="btn-group" role="group" >            
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formForNewSpisok" >Добавить</button>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="formForNewSpisok" tabindex="-1" aria-labelledby="formForNewSpisokLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="formForNewSpisokLabel">Новый список покупок</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" action="/createNewList">
+                            <div class="mb-3">
+                                <label for="ListName" class="form-label">Название списка продуктов</label>
+                                <input type="text" class="form-control" id="ListName" aria-describedby="ListNameHelp">
+                                <div id="ListNameHelp" class="form-text">Введите название списка продуктов</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="storeNameLabel" class="form-label">Магазин</label>
+                                <input type="text" class="form-control" id="storeNameLabel">
+                            </div>
+                            <div class="mb-3">
+                                <label for="dateForShoping" class="form-label">Дата совершения покупок</label>
+                                <input type="date" class="form-control" id="dateForShoping">
+                            </div>
+                            <input type="submit" class="btn btn-primary" value="Сохранить" name="saveNewShopList">
+                            <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+                        </form>
+                    </div>      
+                </div>
+            </div>
         </div>
 
     </div>
