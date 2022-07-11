@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Отредактировать Список</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<div class="album py-5 bg-light">
+  <div class="container-fluid">
+
+    <div class="row row-cols-1 row-cols-sm-2 justify-content-center">
+
+
+      <div class="col align-content-center">
+        <div class="card shadow-sm rounded-3 border-4 border-success">
+          <h5 class=" rounded-3" align="center">СПИСОК ПОКУПОК</h5>
+          <div class="card-body"  th:each="goods: ${allGoods}">
+
+            <div class="row align-items-center">
+              <div class="col-sm-2">
+                <img th:src="${goods.getImg()}" class="img-fluid">
+              </div>
+              <div class="col-6 align-self-center" >
+                <h5 class="text-center border-bottom border-2 border-info" th:text="${goods.getName()}">th:text1</h5>
+              </div>
+              <div class="col-sm-2">
+                <h5 class="text-center border-bottom border-2 border-info" th:text="${goods.getPrice()} + ' &#x20bd'">th:text1</h5>
+              </div>
+              <div class="col-sm-1">
+                <form th:action="@{${idSpisok} + '/deleteGood/'+ ${goods.getId()}}" method="post">
+                  <button type="submit" class="btn btn-danger" alt="удалить">удалить</button>
+                </form>
+              </div>
+            </div>
+
+          </div>
+        </div>
+<!--        th:action="@{${idSpisok} + '/newGood'}"-->
+        <div class="row mt-5">
+          <form method="post">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Введите название продукта" th:name="productName">
+              <input type="submit" class="btn btn-success" value="Найти">
+            </div>
+          </form>
+        </div>
+<!--/////////-->
+        <div class="card-body"  th:if="${!products.isEmpty()}">
+
+          <div  th:each="product: ${products}">
+            <form th:action="@{${idSpisok} + '/newGood'}" method="post" class="row align-items-center mt-5">
+              <div class="col-sm-2">
+                <img th:src="${product.getImg()}" class="img-fluid">
+              </div>
+              <div class="col-4 align-self-center" >
+                <h5 class="text-center border-bottom border-2 border-info" th:text="${product.getName()}">th:text1</h5>
+              </div>
+              <div class="col-2">
+                <input type="number" value="1" class="form-control w-75" name="countProduct">
+              </div>
+              <div class="col-2">
+                  <h5 class="text-center border-bottom border-2 border-info" th:text="${product.getPrice()} + ' &#x20bd'">th:text1</h5>
+              </div>
+
+
+              <input type="hidden" th:value="${product.getName()}" name="nameProduct">
+              <input type="hidden" th:value="${product.getImg()}" name="imgProduct">
+              <input type="hidden" th:value="${product.getPrice()}" name="priceProduct">
+              <input type="hidden" th:value="${product.getPrice()}" name="priceProduct">
+              <button type="submit" class="btn btn-success" alt="удалить">добавить</button>
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
